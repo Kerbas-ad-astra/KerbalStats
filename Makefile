@@ -28,7 +28,7 @@ KS_FILES := \
 	$e
 
 RESGEN2		:= resgen2
-GMCS		:= gmcs
+GMCS		:= mcs
 GMCSFLAGS	:= -optimize -warnaserror
 GIT			:= git
 TAR			:= tar
@@ -53,7 +53,9 @@ info:
 bin/KerbalStats.dll: ${KS_FILES}
 	@mkdir -p bin
 	${GMCS} ${GMCSFLAGS} -t:library -lib:${MANAGED} \
-		-r:Assembly-CSharp,Assembly-CSharp-firstpass,UnityEngine \
+		-r:Assembly-CSharp,Assembly-CSharp-firstpass \
+		-r:UnityEngine,UnityEngine.UI \
+		-r:KSPUtil \
 		-out:$@ $^
 
 clean:
